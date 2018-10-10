@@ -13,6 +13,7 @@ import (
 func displayTown(town towngen.Town) {
 	fmt.Println(town.Name)
 	fmt.Println("Category: " + town.Category.Name)
+	fmt.Println("Region: " + town.Region.Name)
 	fmt.Println("Population: " + strconv.Itoa(town.Population))
 	fmt.Println("Mayor: " + town.Mayor.FirstName + " " + town.Mayor.LastName)
 	fmt.Println("Exports")

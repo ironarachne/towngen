@@ -1,35 +1,6 @@
 package towngen
 
 var (
-	tradeGoods = []string{
-		"cotton",
-		"silk",
-		"wood",
-		"oil",
-		"spice",
-		"fragrances",
-		"jewels",
-		"ivory",
-		"iron",
-		"copper",
-		"gold",
-		"silver",
-		"tea",
-		"rice",
-		"furs",
-		"cattle",
-		"sheep",
-		"horses",
-		"bronze",
-		"marble",
-		"stone",
-		"fruit",
-		"carpets",
-		"tapestries",
-		"sculptures",
-		"dyes",
-	}
-
 	townCategoryOptions = map[string]int{
 		"city":    3,
 		"town":    5,

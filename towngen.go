@@ -13,6 +13,7 @@ type Town struct {
 	Name       string
 	Population int
 	Category   TownCategory
+	Region     Region
 	Mayor      chargen.Character
 	Exports    map[string]int
 	Imports    map[string]int
@@ -29,20 +30,30 @@ type TownCategory struct {
 	MaxImports int
 }
 
-func generateGoodsMap(minAmount int, maxAmount int) map[string]int {
-	var goods = make(map[string]int)
+func generateGoodsMap(minAmount int, maxAmount int, region Region) (map[string]int, map[string]int) {
+	var importGoods = make(map[string]int)
+	var exportGoods = make(map[string]int)
 	var good string
+
+	exports, imports := getGoodsForRegion(region)
+
 	rangeAmount := maxAmount - minAmount
+
 	if rangeAmount == 0 {
 		rangeAmount = 1
 	}
 
 	for i := 0; i < rand.Intn(rangeAmount)+minAmount; i++ {
-		good = utility.RandomItem(tradeGoods)
-		goods[good] = rand.Intn(maxAmount*6) + 1
+		good = utility.RandomItemFromThresholdMap(imports)
+		importGoods[good] = rand.Intn(maxAmount*6) + 1
 	}
 
-	return goods
+	for i := 0; i < rand.Intn(rangeAmount)+minAmount; i++ {
+		good = utility.RandomItemFromThresholdMap(exports)
+		exportGoods[good] = rand.Intn(maxAmount*6) + 1
+	}
+
+	return exportGoods, importGoods
 }
 
 func generateMayor() chargen.Character {
@@ -65,6 +76,16 @@ func generateRandomPopulation(category TownCategory) int {
 	return rand.Intn(sizeIncrement) + category.MinSize
 }
 
+func generateRandomRegion() Region {
+	var regionNames []string
+
+	for _, region := range regions {
+		regionNames = append(regionNames, region.Name)
+	}
+
+	return regions[utility.RandomItem(regionNames)]
+}
+
 func generateTownName() string {
 	townNamePattern := townNames["general"]
 
@@ -84,9 +105,9 @@ func GenerateTown(category string) Town {
 	} else {
 		town.Category = townCategories[category]
 	}
+	town.Region = generateRandomRegion()
 
-	town.Exports = generateGoodsMap(town.Category.MinExports, town.Category.MaxExports)
-	town.Imports = generateGoodsMap(town.Category.MinImports, town.Category.MaxExports)
+	town.Exports, town.Imports = generateGoodsMap(town.Category.MinExports, town.Category.MaxExports, town.Region)
 	town.Population = generateRandomPopulation(town.Category)
 
 	return town
