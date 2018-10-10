@@ -96,7 +96,7 @@ func generateTownName() string {
 }
 
 // GenerateTown generates a random town
-func GenerateTown(category string) Town {
+func GenerateTown(category string, region string) Town {
 	town := Town{}
 	town.Mayor = generateMayor()
 	town.Name = generateTownName()
@@ -105,7 +105,11 @@ func GenerateTown(category string) Town {
 	} else {
 		town.Category = townCategories[category]
 	}
-	town.Region = generateRandomRegion()
+	if region == "random" {
+		town.Region = generateRandomRegion()
+	} else {
+		town.Region = regions[region]
+	}
 
 	town.Exports, town.Imports = generateGoodsMap(town.Category.MinExports, town.Category.MaxExports, town.Region)
 	town.Population = generateRandomPopulation(town.Category)
