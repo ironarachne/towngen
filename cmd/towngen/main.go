@@ -31,6 +31,7 @@ func displayTown(town towngen.Town) {
 }
 
 func main() {
+	townCategory := flag.String("c", "random", "Town size category (city, town, village, random)")
 	randomSeed := flag.Int64("s", 0, "Optional random generator seed")
 
 	flag.Parse()
@@ -41,7 +42,7 @@ func main() {
 		rand.Seed(*randomSeed)
 	}
 
-	town := towngen.GenerateTown()
+	town := towngen.GenerateTown(*townCategory)
 
 	displayTown(town)
 }
