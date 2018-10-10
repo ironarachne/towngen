@@ -2,6 +2,7 @@ package towngen
 
 import (
 	"math/rand"
+	"strings"
 
 	"github.com/ironarachne/chargen"
 	"github.com/ironarachne/utility"
@@ -65,7 +66,12 @@ func generateRandomPopulation(category TownCategory) int {
 }
 
 func generateTownName() string {
-	return "Townia"
+	townNamePattern := townNames["general"]
+
+	prefix := utility.RandomItem(townNamePattern.Prefixes)
+	suffix := utility.RandomItem(townNamePattern.Suffixes)
+
+	return strings.Title(prefix + suffix)
 }
 
 // GenerateTown generates a random town
