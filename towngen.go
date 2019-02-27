@@ -10,24 +10,24 @@ import (
 
 // Town is a town
 type Town struct {
-	Name       string
-	Population int
-	Category   TownCategory
-	Region     Region
-	Mayor      chargen.Character
-	Exports    map[string]int
-	Imports    map[string]int
+	Name       string            `json:"townName"`
+	Population int               `json:"population"`
+	Category   TownCategory      `json:"category"`
+	Region     Region            `json:"region"`
+	Mayor      chargen.Character `json:"mayor"`
+	Exports    map[string]int    `json:"exports"`
+	Imports    map[string]int    `json:"imports"`
 }
 
 // TownCategory is a type of town
 type TownCategory struct {
-	Name       string
-	MinSize    int
-	MaxSize    int
-	MinExports int
-	MaxExports int
-	MinImports int
-	MaxImports int
+	Name       string `json:"name"`
+	MinSize    int    `json:"minSize"`
+	MaxSize    int    `json:"maxSize"`
+	MinExports int    `json:"minExports"`
+	MaxExports int    `json:"maxExports"`
+	MinImports int    `json:"minImports"`
+	MaxImports int    `json:"maxImports"`
 }
 
 func generateGoodsMap(minAmount int, maxAmount int, region Region) (map[string]int, map[string]int) {
