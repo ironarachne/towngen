@@ -4,6 +4,7 @@ var (
 	regions = map[string]Region{
 		"forest": Region{
 			"forest",
+			"forest",
 			[]string{
 				"hunted",
 				"wood",
@@ -16,6 +17,7 @@ var (
 		},
 		"hills": Region{
 			"hills",
+			"hill",
 			[]string{
 				"agriculture",
 				"livestock",
@@ -28,6 +30,7 @@ var (
 		},
 		"mountains": Region{
 			"mountains",
+			"mountain",
 			[]string{
 				"ores",
 				"quarried",
@@ -39,6 +42,7 @@ var (
 			},
 		},
 		"desert": Region{
+			"desert",
 			"desert",
 			[]string{
 				"luxury",
@@ -53,6 +57,7 @@ var (
 			},
 		},
 		"coastal": Region{
+			"coastal",
 			"coastal",
 			[]string{
 				"seaproducts",
@@ -70,9 +75,10 @@ var (
 
 // Region is a geographic area
 type Region struct {
-	Name     string
-	Produces []string
-	Needs    []string
+	Name       string
+	Descriptor string
+	Produces   []string
+	Needs      []string
 }
 
 func getGoodsForRegion(region Region) (map[string]int, map[string]int) {
