@@ -5,18 +5,19 @@ import (
 	"strings"
 
 	"github.com/ironarachne/chargen"
+	"github.com/ironarachne/climategen"
 	"github.com/ironarachne/utility"
 )
 
 // Town is a town
 type Town struct {
-	Name       string            `json:"townName"`
-	Population int               `json:"population"`
-	Category   TownCategory      `json:"category"`
-	Region     Region            `json:"region"`
-	Mayor      chargen.Character `json:"mayor"`
-	Exports    map[string]int    `json:"exports"`
-	Imports    map[string]int    `json:"imports"`
+	Name       string             `json:"townName"`
+	Population int                `json:"population"`
+	Category   TownCategory       `json:"category"`
+	Climate    climategen.Climate `json:"climate"`
+	Mayor      chargen.Character  `json:"mayor"`
+	Exports    map[string]int     `json:"exports"`
+	Imports    map[string]int     `json:"imports"`
 }
 
 // TownCategory is a type of town
@@ -28,32 +29,6 @@ type TownCategory struct {
 	MaxExports int    `json:"maxExports"`
 	MinImports int    `json:"minImports"`
 	MaxImports int    `json:"maxImports"`
-}
-
-func generateGoodsMap(minAmount int, maxAmount int, region Region) (map[string]int, map[string]int) {
-	var importGoods = make(map[string]int)
-	var exportGoods = make(map[string]int)
-	var good string
-
-	exports, imports := getGoodsForRegion(region)
-
-	rangeAmount := maxAmount - minAmount
-
-	if rangeAmount == 0 {
-		rangeAmount = 1
-	}
-
-	for i := 0; i < rand.Intn(rangeAmount)+minAmount; i++ {
-		good = utility.RandomItemFromThresholdMap(imports)
-		importGoods[good] = rand.Intn(maxAmount*6) + 1
-	}
-
-	for i := 0; i < rand.Intn(rangeAmount)+minAmount; i++ {
-		good = utility.RandomItemFromThresholdMap(exports)
-		exportGoods[good] = rand.Intn(maxAmount*6) + 1
-	}
-
-	return exportGoods, importGoods
 }
 
 func generateMayor() chargen.Character {
@@ -70,20 +45,42 @@ func generateRandomCategory() TownCategory {
 	return category
 }
 
+func generateRandomExports(climate climategen.Climate, category TownCategory) map[string]int {
+	exports := map[string]int{}
+
+	numberOfExports := rand.Intn(category.MaxExports+1-category.MinExports) + category.MinExports
+	exportAmount := 0
+	newExport := ""
+
+	for i := 0; i < numberOfExports; i++ {
+		newExport = utility.RandomItem(climate.Resources)
+		exportAmount = rand.Intn(3) + 1
+		exports[newExport] = exportAmount
+	}
+
+	return exports
+}
+
+func generateRandomImports(climate climategen.Climate, category TownCategory) map[string]int {
+	imports := map[string]int{}
+
+	numberOfImports := rand.Intn(category.MaxImports+1-category.MinImports) + category.MinImports
+	importAmount := 0
+	newImport := ""
+
+	for i := 0; i < numberOfImports; i++ {
+		newImport = utility.RandomItem(climate.Needs)
+		importAmount = rand.Intn(3) + 1
+		imports[newImport] = importAmount
+	}
+
+	return imports
+}
+
 func generateRandomPopulation(category TownCategory) int {
 	sizeIncrement := category.MaxSize - category.MinSize
 
 	return rand.Intn(sizeIncrement) + category.MinSize
-}
-
-func generateRandomRegion() Region {
-	var regionNames []string
-
-	for _, region := range regions {
-		regionNames = append(regionNames, region.Name)
-	}
-
-	return regions[utility.RandomItem(regionNames)]
 }
 
 func generateTownName() string {
@@ -96,7 +93,7 @@ func generateTownName() string {
 }
 
 // GenerateTown generates a random town
-func GenerateTown(category string, region string) Town {
+func GenerateTown(category string, climate string) Town {
 	town := Town{}
 	town.Mayor = generateMayor()
 	town.Name = generateTownName()
@@ -105,13 +102,14 @@ func GenerateTown(category string, region string) Town {
 	} else {
 		town.Category = townCategories[category]
 	}
-	if region == "random" {
-		town.Region = generateRandomRegion()
+	if climate == "random" {
+		town.Climate = climategen.Generate()
 	} else {
-		town.Region = regions[region]
+		town.Climate = climategen.GetClimate(climate)
 	}
 
-	town.Exports, town.Imports = generateGoodsMap(town.Category.MinExports, town.Category.MaxExports, town.Region)
+	town.Exports = generateRandomExports(town.Climate, town.Category)
+	town.Imports = generateRandomImports(town.Climate, town.Category)
 	town.Population = generateRandomPopulation(town.Category)
 
 	return town
