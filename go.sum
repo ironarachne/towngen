@@ -22,6 +22,8 @@ github.com/iris-contrib/go.uuid v2.0.0+incompatible h1:XZubAYg61/JwnJNbZilGjf3b3
 github.com/iris-contrib/go.uuid v2.0.0+incompatible/go.mod h1:iz2lgM/1UnEf1kP0L/+fafWORmlnuysV2EMP8MW+qe0=
 github.com/ironarachne/chargen v0.0.0-20190227204145-5663f144e70f h1:yfIzoH4/hyQEMiVbDKkILZCQ0iyqv4OtdwIeW8NPSmk=
 github.com/ironarachne/chargen v0.0.0-20190227204145-5663f144e70f/go.mod h1:meRL/nZQMy2Mb3W9CLNPRi8msJbXwriUimC5FOyvreE=
+github.com/ironarachne/chargen v0.0.0-20190309165134-658ccecdd5a6 h1:HhLgiI0iXQliGrw4nTZGMAFldmtHL+halitBHkg3ywE=
+github.com/ironarachne/chargen v0.0.0-20190309165134-658ccecdd5a6/go.mod h1:QWyM/MlBeATqUl/UTDl4KrRv8ehI9GNI1hY54yA+JjE=
 github.com/ironarachne/climategen v0.0.0-20190307203027-33cfbd75157b h1:c2NOAzuxJEAUzrjTOZ/ktsd//UKD+pSgIvjC6JF0rC8=
 github.com/ironarachne/climategen v0.0.0-20190307203027-33cfbd75157b/go.mod h1:34t9weUujzzU37r/wMBaQfVN55QOh+otxtZ9nPWKsAM=
 github.com/ironarachne/climategen v0.0.0-20190309163423-cddd04bd0fd1 h1:0WmUF2GCZ2ae2Qv/FPFkZQu0Q6MIBUbwh8wd3qIQf20=
