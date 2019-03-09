@@ -24,6 +24,8 @@ github.com/ironarachne/chargen v0.0.0-20190227204145-5663f144e70f h1:yfIzoH4/hyQ
 github.com/ironarachne/chargen v0.0.0-20190227204145-5663f144e70f/go.mod h1:meRL/nZQMy2Mb3W9CLNPRi8msJbXwriUimC5FOyvreE=
 github.com/ironarachne/climategen v0.0.0-20190307203027-33cfbd75157b h1:c2NOAzuxJEAUzrjTOZ/ktsd//UKD+pSgIvjC6JF0rC8=
 github.com/ironarachne/climategen v0.0.0-20190307203027-33cfbd75157b/go.mod h1:34t9weUujzzU37r/wMBaQfVN55QOh+otxtZ9nPWKsAM=
+github.com/ironarachne/climategen v0.0.0-20190309163423-cddd04bd0fd1 h1:0WmUF2GCZ2ae2Qv/FPFkZQu0Q6MIBUbwh8wd3qIQf20=
+github.com/ironarachne/climategen v0.0.0-20190309163423-cddd04bd0fd1/go.mod h1:nFxt2d6J/nlXpa5surgw8foZcmVdUbstyrBo5cv7dh8=
 github.com/ironarachne/namegen v0.0.0-20181025152707-2bd82e456d8f h1:ojeQHdbLs7BMNJD4kDTH7H/wBLkRRxwMKBI3Tjr3VNo=
 github.com/ironarachne/namegen v0.0.0-20181025152707-2bd82e456d8f/go.mod h1:eyp4WtK269tAXz/Q80hVD+h+wcbqDeYpuQ+fKuByBVE=
 github.com/ironarachne/utility v0.0.0-20181021125830-32a6c250e33b h1:EhG1yiJbIUwbHhtAAqoPxW0ClJnE9W5HLSyHSu9gVk8=
