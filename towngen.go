@@ -6,7 +6,7 @@ import (
 
 	"github.com/ironarachne/chargen"
 	"github.com/ironarachne/climategen"
-	"github.com/ironarachne/utility"
+	"github.com/ironarachne/random"
 )
 
 // Town is a town
@@ -38,7 +38,7 @@ func generateMayor() chargen.Character {
 }
 
 func generateRandomCategory() TownCategory {
-	categoryName := utility.RandomItemFromThresholdMap(townCategoryOptions)
+	categoryName := random.ItemFromThresholdMap(townCategoryOptions)
 
 	category := townCategories[categoryName]
 
@@ -53,7 +53,7 @@ func generateRandomExports(climate climategen.Climate, category TownCategory) ma
 	newExport := ""
 
 	for i := 0; i < numberOfExports; i++ {
-		newExport = utility.RandomItem(climate.Resources)
+		newExport = random.Item(climate.Resources)
 		exportAmount = rand.Intn(3) + 1
 		exports[newExport] = exportAmount
 	}
@@ -69,7 +69,7 @@ func generateRandomImports(climate climategen.Climate, category TownCategory) ma
 	newImport := ""
 
 	for i := 0; i < numberOfImports; i++ {
-		newImport = utility.RandomItem(climate.Needs)
+		newImport = random.Item(climate.Needs)
 		importAmount = rand.Intn(3) + 1
 		imports[newImport] = importAmount
 	}
@@ -86,8 +86,8 @@ func generateRandomPopulation(category TownCategory) int {
 func generateTownName() string {
 	townNamePattern := townNames["general"]
 
-	prefix := utility.RandomItem(townNamePattern.Prefixes)
-	suffix := utility.RandomItem(townNamePattern.Suffixes)
+	prefix := random.Item(townNamePattern.Prefixes)
+	suffix := random.Item(townNamePattern.Suffixes)
 
 	return strings.Title(prefix + suffix)
 }
