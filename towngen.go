@@ -45,15 +45,16 @@ func generateRandomCategory() TownCategory {
 	return category
 }
 
-func generateRandomExports(climate climategen.Climate, category TownCategory) map[string]int {
+func (town Town) generateRandomExports() map[string]int {
 	exports := map[string]int{}
+	possibleExports := GetAllTradeGoods(town.Climate.Resources)
 
-	numberOfExports := rand.Intn(category.MaxExports+1-category.MinExports) + category.MinExports
+	numberOfExports := rand.Intn(town.Category.MaxExports+1-town.Category.MinExports) + town.Category.MinExports
 	exportAmount := 0
 	newExport := ""
 
 	for i := 0; i < numberOfExports; i++ {
-		newExport = random.Item(climate.Resources)
+		newExport = random.Item(possibleExports)
 		exportAmount = rand.Intn(3) + 1
 		exports[newExport] = exportAmount
 	}
@@ -61,15 +62,16 @@ func generateRandomExports(climate climategen.Climate, category TownCategory) ma
 	return exports
 }
 
-func generateRandomImports(climate climategen.Climate, category TownCategory) map[string]int {
+func (town Town) generateRandomImports() map[string]int {
 	imports := map[string]int{}
+	possibleImports := GetAllTradeGoods(town.Climate.Needs)
 
-	numberOfImports := rand.Intn(category.MaxImports+1-category.MinImports) + category.MinImports
+	numberOfImports := rand.Intn(town.Category.MaxImports+1-town.Category.MinImports) + town.Category.MinImports
 	importAmount := 0
 	newImport := ""
 
 	for i := 0; i < numberOfImports; i++ {
-		newImport = random.Item(climate.Needs)
+		newImport = random.Item(possibleImports)
 		importAmount = rand.Intn(3) + 1
 		imports[newImport] = importAmount
 	}
@@ -108,8 +110,8 @@ func GenerateTown(category string, climate string) Town {
 		town.Climate = climategen.GetClimate(climate)
 	}
 
-	town.Exports = generateRandomExports(town.Climate, town.Category)
-	town.Imports = generateRandomImports(town.Climate, town.Category)
+	town.Exports = town.generateRandomExports()
+	town.Imports = town.generateRandomImports()
 	town.Population = generateRandomPopulation(town.Category)
 
 	return town
