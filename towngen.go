@@ -16,8 +16,8 @@ type Town struct {
 	Category   TownCategory       `json:"category"`
 	Climate    climategen.Climate `json:"climate"`
 	Mayor      chargen.Character  `json:"mayor"`
-	Exports    map[string]int     `json:"exports"`
-	Imports    map[string]int     `json:"imports"`
+	Exports    []TradeGood        `json:"exports"`
+	Imports    []TradeGood        `json:"imports"`
 }
 
 // TownCategory is a type of town
@@ -45,36 +45,20 @@ func generateRandomCategory() TownCategory {
 	return category
 }
 
-func (town Town) generateRandomExports() map[string]int {
-	exports := map[string]int{}
-	possibleExports := GetAllTradeGoods(town.Climate.Resources)
+func (town Town) generateRandomExports() []TradeGood {
+	var exports []TradeGood
 
-	numberOfExports := rand.Intn(town.Category.MaxExports+1-town.Category.MinExports) + town.Category.MinExports
-	exportAmount := 0
-	newExport := ""
-
-	for i := 0; i < numberOfExports; i++ {
-		newExport = random.Item(possibleExports)
-		exportAmount = rand.Intn(3) + 1
-		exports[newExport] = exportAmount
-	}
+	exports = generateTradeGoods(town.Category.MinExports, town.Category.MaxExports, town.Climate.Resources)
 
 	return exports
 }
 
-func (town Town) generateRandomImports() map[string]int {
-	imports := map[string]int{}
-	possibleImports := GetAllTradeGoods(town.Climate.Needs)
+func (town Town) generateRandomImports() []TradeGood {
+	var imports []TradeGood
 
-	numberOfImports := rand.Intn(town.Category.MaxImports+1-town.Category.MinImports) + town.Category.MinImports
-	importAmount := 0
-	newImport := ""
+	foreignClimate := climategen.GetForeignClimate(town.Climate)
 
-	for i := 0; i < numberOfImports; i++ {
-		newImport = random.Item(possibleImports)
-		importAmount = rand.Intn(3) + 1
-		imports[newImport] = importAmount
-	}
+	imports = generateTradeGoods(town.Category.MinImports, town.Category.MaxImports, foreignClimate.Resources)
 
 	return imports
 }
@@ -97,8 +81,10 @@ func generateTownName() string {
 // GenerateTown generates a random town
 func GenerateTown(category string, climate string) Town {
 	town := Town{}
+
 	town.Mayor = generateMayor()
 	town.Name = generateTownName()
+
 	if category == "random" {
 		town.Category = generateRandomCategory()
 	} else {

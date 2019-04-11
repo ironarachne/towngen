@@ -1,36 +1,62 @@
 package towngen
 
 import (
+	"math/rand"
+
 	"github.com/ironarachne/climategen"
+	"github.com/ironarachne/random"
 )
 
-// GetAllTradeGoods converts a list of resources into a list of trade goods
-func GetAllTradeGoods(resources []climategen.Resource) []string {
-	var goodsName string
+// TradeGood is a trade good entry
+type TradeGood struct {
+	Name    string
+	Quality string
+	Amount  int
+}
 
-	goods := []string{}
+func generateTradeGoods(min int, max int, resources []climategen.Resource) []TradeGood {
+	var good TradeGood
 
-	for _, resource := range resources {
-		for _, t := range resource.Types {
-			if t == "hide" {
-				goodsName = resource.Name + " hides"
-			} else if t == "meat" {
-				goodsName = resource.Name + " meat"
-			} else if t == "feathers" {
-				goodsName = resource.Name + " feathers"
-			} else if t == "eggs" {
-				goodsName = resource.Name + " eggs"
-			} else if t == "fruit" || t == "grain" {
-				goodsName = resource.Name
-			} else {
-				goodsName = resource.Name
-			}
+	goods := []TradeGood{}
 
-			if !inSlice(goodsName, goods) {
-				goods = append(goods, goodsName)
-			}
-		}
+	possibleGoods := GetAllTradeGoods(resources)
+
+	numberOfGoods := rand.Intn(max+1-min) + min
+	amount := 0
+	newItem := ""
+
+	for i := 0; i < numberOfGoods; i++ {
+		good = TradeGood{}
+		newItem = random.Item(possibleGoods)
+		amount = rand.Intn(3) + 1
+		good.Name = newItem
+		good.Amount = amount
+		good.Quality = randomQuality()
+		goods = append(goods, good)
 	}
 
 	return goods
+}
+
+// GetAllTradeGoods converts a list of resources into a list of trade goods
+func GetAllTradeGoods(resources []climategen.Resource) []string {
+	goods := []string{}
+
+	for _, resource := range resources {
+		goods = append(goods, resource.Name)
+	}
+
+	return goods
+}
+
+func randomQuality() string {
+	qualities := map[string]int{
+		"exceptional":  1,
+		"fine":         2,
+		"":             11,
+		"questionable": 2,
+		"pathetic":     1,
+	}
+
+	return random.ItemFromThresholdMap(qualities)
 }
