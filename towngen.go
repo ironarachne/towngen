@@ -2,7 +2,6 @@ package towngen
 
 import (
 	"math/rand"
-	"strings"
 
 	"github.com/ironarachne/chargen"
 	"github.com/ironarachne/climategen"
@@ -33,8 +32,8 @@ type TownCategory struct {
 	MaxImports int
 }
 
-func generateMayor() chargen.Character {
-	mayor := chargen.GenerateCharacter()
+func (town Town) generateMayor() chargen.Character {
+	mayor := chargen.GenerateCharacterOfCulture(town.Culture)
 
 	return mayor
 }
@@ -71,21 +70,14 @@ func generateRandomPopulation(category TownCategory) int {
 	return rand.Intn(sizeIncrement) + category.MinSize
 }
 
-func generateTownName() string {
-	townNamePattern := townNames["general"]
-
-	prefix := random.Item(townNamePattern.Prefixes)
-	suffix := random.Item(townNamePattern.Suffixes)
-
-	return strings.Title(prefix + suffix)
+func (town Town) generateTownName() string {
+	name := town.Culture.Language.RandomName()
+	return name
 }
 
 // GenerateTown generates a random town
 func GenerateTown(category string, climate string) Town {
 	town := Town{}
-
-	town.Mayor = generateMayor()
-	town.Name = generateTownName()
 
 	if category == "random" {
 		town.Category = generateRandomCategory()
@@ -101,6 +93,9 @@ func GenerateTown(category string, climate string) Town {
 	culture := culturegen.GenerateCulture()
 	culture = culture.SetClimate(town.Climate.Name)
 	town = SetCulture(culture, town)
+
+	town.Mayor = town.generateMayor()
+	town.Name = town.generateTownName()
 
 	town.Exports = town.generateRandomExports()
 	town.Imports = town.generateRandomImports()
