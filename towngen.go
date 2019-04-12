@@ -6,29 +6,31 @@ import (
 
 	"github.com/ironarachne/chargen"
 	"github.com/ironarachne/climategen"
+	"github.com/ironarachne/culturegen"
 	"github.com/ironarachne/random"
 )
 
 // Town is a town
 type Town struct {
-	Name       string             `json:"townName"`
-	Population int                `json:"population"`
-	Category   TownCategory       `json:"category"`
-	Climate    climategen.Climate `json:"climate"`
-	Mayor      chargen.Character  `json:"mayor"`
-	Exports    []TradeGood        `json:"exports"`
-	Imports    []TradeGood        `json:"imports"`
+	Name       string
+	Population int
+	Category   TownCategory
+	Climate    climategen.Climate
+	Culture    culturegen.Culture
+	Mayor      chargen.Character
+	Exports    []TradeGood
+	Imports    []TradeGood
 }
 
 // TownCategory is a type of town
 type TownCategory struct {
-	Name       string `json:"name"`
-	MinSize    int    `json:"minSize"`
-	MaxSize    int    `json:"maxSize"`
-	MinExports int    `json:"minExports"`
-	MaxExports int    `json:"maxExports"`
-	MinImports int    `json:"minImports"`
-	MaxImports int    `json:"maxImports"`
+	Name       string
+	MinSize    int
+	MaxSize    int
+	MinExports int
+	MaxExports int
+	MinImports int
+	MaxImports int
 }
 
 func generateMayor() chargen.Character {
@@ -96,9 +98,25 @@ func GenerateTown(category string, climate string) Town {
 		town.Climate = climategen.GetClimate(climate)
 	}
 
+	culture := culturegen.GenerateCulture()
+	culture = culture.SetClimate(town.Climate.Name)
+	town = SetCulture(culture, town)
+
 	town.Exports = town.generateRandomExports()
 	town.Imports = town.generateRandomImports()
 	town.Population = generateRandomPopulation(town.Category)
 
 	return town
+}
+
+// SetCulture sets the culture of a town and recalculates some things
+func SetCulture(culture culturegen.Culture, town Town) Town {
+	newTown := town
+
+	newTown.Culture = culture
+	newTown.Name = newTown.Culture.Language.RandomName()
+	newTown.Mayor.FirstName = newTown.Culture.Language.RandomGenderedName(town.Mayor.Gender)
+	newTown.Mayor.LastName = newTown.Culture.Language.RandomName()
+
+	return newTown
 }
