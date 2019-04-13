@@ -34,6 +34,8 @@ type TownCategory struct {
 
 func (town Town) generateMayor() chargen.Character {
 	mayor := chargen.GenerateCharacterOfCulture(town.Culture)
+	mayor.AgeCategory = "adult"
+	mayor.Age = 30 + rand.Intn(30)
 
 	return mayor
 }

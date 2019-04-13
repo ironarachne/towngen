@@ -32,6 +32,8 @@ github.com/ironarachne/chargen v0.0.0-20190412184033-92c94b9c0cae h1:u/e2ztirSaq
 github.com/ironarachne/chargen v0.0.0-20190412184033-92c94b9c0cae/go.mod h1:gqBOUiy44faj8RuTAOwO8etr3Pnl22+3VJw0WVo5QJw=
 github.com/ironarachne/chargen v0.0.0-20190412195451-4c6f423f7feb h1:fod55ZzLLa/2z2Y7xHkNEUea/YzsNOWMDh5Hp3hFuXE=
 github.com/ironarachne/chargen v0.0.0-20190412195451-4c6f423f7feb/go.mod h1:+YTxQHNSiaUKOQG/AGqtlqt0YAAxqTvzfUwKLt478/o=
+github.com/ironarachne/chargen v0.0.0-20190413123533-7392a553e0cd h1:PZA6QoBmS6vhozyzs3NgAbMSXe+OLr5NtQfqY1sWwuY=
+github.com/ironarachne/chargen v0.0.0-20190413123533-7392a553e0cd/go.mod h1:v+i0QwGAk9Ev5l51pZFEcUQ3KhPzaEffey9GHQqKMvQ=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8 h1:0vhenDN83AwksqxPQbUshL88f66NgRTVJODBv1Dn+xA=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
 github.com/ironarachne/climategen v0.0.0-20190410161431-5460578cb815 h1:i2FExYXUrsQfaTkZ/Mncb0uxpqA4ZZGjMJdzvoq3XT0=
@@ -48,6 +50,8 @@ github.com/ironarachne/culturegen v0.0.0-20190412183421-e03e4bad945c h1:iB9tHn0Z
 github.com/ironarachne/culturegen v0.0.0-20190412183421-e03e4bad945c/go.mod h1:4/V2X1Jr1SqZPDwoYchv4mZW/rY51Xa+4r2nLE2x2R0=
 github.com/ironarachne/culturegen v0.0.0-20190412195431-e35bbec0f3a4 h1:gNXXzmt90Dgtofp6uvQLXH43lia5U31HlV9JLBupdL0=
 github.com/ironarachne/culturegen v0.0.0-20190412195431-e35bbec0f3a4/go.mod h1:4/V2X1Jr1SqZPDwoYchv4mZW/rY51Xa+4r2nLE2x2R0=
+github.com/ironarachne/culturegen v0.0.0-20190413123406-71a9472133da h1:qvoJwtUJegOrfNHui7ucMp4h1g2dfEEzL5KtQ/hkCfA=
+github.com/ironarachne/culturegen v0.0.0-20190413123406-71a9472133da/go.mod h1:4/V2X1Jr1SqZPDwoYchv4mZW/rY51Xa+4r2nLE2x2R0=
 github.com/ironarachne/namegen v0.0.0-20190309164720-ff7d64aed378 h1:aapy0hwbvM8gP1rcmXC1t1UiZ37qJzBrw/qbEu/RXCU=
 github.com/ironarachne/namegen v0.0.0-20190309164720-ff7d64aed378/go.mod h1:B5W+JNNiMpaRGM7wkqbefTs+Q7TcKODMDo547AhWcnI=
 github.com/ironarachne/namegen v0.0.0-20190325171832-3ffb2a899b12 h1:pKoNNECYTDXU3lY3Br48hsOkspkRLuvohSb+fG8tRrk=
@@ -111,6 +115,7 @@ golang.org/x/sys v0.0.0-20190322080309-f49334f85ddc/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20190403152447-81d4e9dc473e/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190410235845-0ad05ae3009d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190411185658-b44545bcd369/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/tools v0.0.0-20181221001348-537d06c36207/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190325161752-5a8dccf5b48a/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
